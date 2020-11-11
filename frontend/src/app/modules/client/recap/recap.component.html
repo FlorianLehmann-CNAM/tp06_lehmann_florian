@@ -1,0 +1,13 @@
+<div  *ngIf="user | async as user" class="recapContainer">
+  <h1> Récapitulatif de la saisie </h1>
+  <p>Nom : {{user.Name}}</p>
+  <p>Prénom : {{user.Surname}}</p>
+  <p>Adresse : {{user.Address}}</p>
+  <p>Code postal : {{user.PostalCode}}</p>
+  <p>Ville : {{user.City}}</p>
+  <p>Téléphone portable : {{user.MobilePhone}}</p>
+  <p>Adresse e-mail : {{user.Mail}}</p>
+  <p>Pays : {{user.Country}}</p>
+  <p>Civilité : {{user.Gender}}</p>
+  <p>Identifiant : {{user.Login}}</p> 
+</div>

@@ -1,0 +1,18 @@
+<h1> Catalogue </h1>
+<app-search-box [dataToFilter]="productsObservable" (onFilteredData)="onFilteredData($event)"></app-search-box>
+<div *ngIf="(displayProducts | async)?.length == 0">
+	<p> Pas de produit correspondants à votre recherche. </p>
+</div>
+<div class="row">
+	<div class="col-sm-2" *ngFor="let product of displayProducts | async">
+		<div class="card"style="width: auto">
+			<img class="card-img-top" (click)="onCardClicked(product)"  style="width: 150px; height: 150px" [src]="product.imgUrl" [alt]="product.title"/>
+			<div class="card-body">
+				<h5 class="card-title">{{product.title}}</h5>
+				<p class="card-text">{{product.description}}</p>
+				<p class="card-text"> Prix: {{product.price}}€</p>
+            </div>
+            <button class="btn-primary" (click)="addProductToShopppingCart(product)">Ajouter au panier</button>
+		</div> 
+	</div>
+</div>

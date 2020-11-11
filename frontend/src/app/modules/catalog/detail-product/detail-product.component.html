@@ -1,0 +1,20 @@
+<div *ngIf="product | async as product; else loading" style="text-align: center;">
+    <div class="headTitle">
+        <h1>Détails de "{{product.title}}"</h1>
+        <button class="btn-primary" (click)="onAddToShoppingCart(product)"> Ajouter dans le panier </button>
+    </div>
+    
+    <img [src]="product.imgUrl" [alt]="product.title" style="max-width: 400px; max-height: 400px"/>
+    <ul class="list-group">
+        <li class="list-group" style="display: inline-block"><b>Fabriquant : </b>{{product.manufacturer}}</li>
+        <li class="list-group" style="display: inline-block"><b>Couleur : </b>{{product.color}}</li>
+        <li class="list-group" style="display: inline-block"><b>Dimensions : </b>{{product.width}} x {{product.height}}</li>
+        <li class="list-group" style="display: inline-block"><b>Garantie :  </b>{{product.garantie}} an(s)</li>
+        <li class="list-group" style="display: inline-block"><b>Prix unitaire :  </b>{{product.price}} €</li>
+        <li class="list-group" style="display: inline-block"><b>Description : <br/>   </b>{{product.description}}</li>
+    </ul>
+</div>
+
+<ng-template #loading>
+    <p style="text-align: center;">Loading...</p>
+</ng-template>

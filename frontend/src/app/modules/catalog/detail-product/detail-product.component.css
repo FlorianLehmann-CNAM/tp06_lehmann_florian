@@ -1,0 +1,10 @@
+.headTitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.headTitle > button{
+    height: 40px;
+    margin-left: 10px;
+}

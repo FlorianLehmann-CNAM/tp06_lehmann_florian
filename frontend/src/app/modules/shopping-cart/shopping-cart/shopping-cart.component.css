@@ -1,0 +1,11 @@
+.card-footer-custom{
+    display:flex;
+    flex-direction:row;
+    margin: 5px;
+    margin-left: 15px;
+    justify-content: space-between;
+}
+
+.shopping-cart-title{
+    display: inline-flex;
+}

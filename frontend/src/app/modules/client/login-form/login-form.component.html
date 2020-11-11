@@ -1,0 +1,18 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="form-group" >
+        <label>
+            Login
+            <input  type="text" class="form-control" formControlName="login" placeholder="Entrez votre Login" >
+        </label>
+    </div>
+    <div class="form-group">
+        <label>
+            Mot de passe
+            <input type="password" class="form-control" formControlName="password">
+        </label>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Se connecter</button>
+</form>
+<div *ngIf="invalidMessage != null" class="invalid-message">
+    <p>{{invalidMessage}}</p>
+</div>

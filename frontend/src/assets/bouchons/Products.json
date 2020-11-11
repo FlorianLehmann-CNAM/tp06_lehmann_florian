@@ -1,0 +1,39 @@
+[
+  {
+    "id": 1,
+    "title": "Licorne rose",
+    "description": "Une magnifique licorne rose en plastique, qui saura vous faire redécouvrir le monde magique des licornes.",
+    "price" : 0.05,
+    "imgUrl": "https://thumbs.dreamstime.com/b/licorne-rose-56829138.jpg",
+    "manufacturer": "Licorne Company",
+    "color" : "Rose",
+    "width": 400,
+    "height": 400,
+    "garantie": 2
+  },
+  {
+    "id": 2,
+    "title": "Playmobil nouvelle génération",
+    "description" : "Avec des playmobil nouvelle génération, plus besoin de faire attention en marchant dessus : le caoutchouc ne vous fera aucun mal !",
+    "price" : 1.00,
+    "imgUrl": "https://images-na.ssl-images-amazon.com/images/I/91PoONxpceL._AC_SX355_.jpg",
+    "manufacturer": "Licorne Company",
+    "color" : "Rose",
+    "width": 400,
+    "height": 400,
+    "garantie": 2
+  },
+  {
+    "id": 3,
+    "title" : "Maison Toy Story",
+    "description" : "Vivez l'incroyable aventure de Toy Story avec cette maison en plastique recyclé !",
+    "price" : 104,
+    "imgUrl": "https://m.media-amazon.com/images/I/61mJ40AZL3L._AC_UL320_.jpg",
+    "manufacturer": "Licorne Company",
+    "color" : "Rose",
+    "width": 400,
+    "height": 400,
+    "garantie": 2
+
+  }
+]

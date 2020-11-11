@@ -1,0 +1,18 @@
+<div class="searchBox">
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Filtre : </span>
+    </div>
+    <input
+      class="form-control"
+      type="text"
+      placeholder="Entrez le nom d'un produit"
+      style="width: 250px;"
+      (keyup.enter)="onKey($event)"
+    />
+    <span style="margin: auto; padding-left: 5px;"
+      >Appuyez sur la touche "Entrée" pour valider votre recherche.</span
+    >
+    <div></div>
+  </div>
+</div>
