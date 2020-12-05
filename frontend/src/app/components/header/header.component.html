@@ -2,4 +2,5 @@
 
 <h1> Application web Angular : Formulaire </h1>
 <p>Nombre d'articles dans votre panier : {{ nbProduct$ | async }}</p>
+<button class="btn-primary" (click)="Disconnect()" *ngIf="isUserLogged$ | async">Déconnexion</button>
 </header>

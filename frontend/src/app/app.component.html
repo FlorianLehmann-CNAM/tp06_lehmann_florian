@@ -6,8 +6,8 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-item nav-link" routerLink="/home">Accueil</a>
-        <a class="nav-item nav-link" routerLink="/catalogue">Catalogue</a>
-        <a class="nav-item nav-link" routerLink="/shopping-cart">Panier</a>
+        <a class="nav-item nav-link" *ngIf="(isLogged | async)" routerLink="/catalogue">Catalogue</a>
+        <a class="nav-item nav-link" *ngIf="(isLogged | async)" routerLink="/shopping-cart">Panier</a>
         <a class="nav-item nav-link" *ngIf="!(isLogged | async)" routerLink="/client">S'inscrire</a>
         <a class="nav-item nav-link" *ngIf="!(isLogged | async)" routerLink="/client/login">Se connecter</a>
       </div>

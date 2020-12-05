@@ -7,7 +7,9 @@ import { Product } from '../models/Product';
 import { UserLoginQueryModel } from '../models/query/UserLoginQueryModel';
 import { User } from '../models/User';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class HttpServiceService {
 
   constructor(private http: HttpClient) { }
@@ -21,7 +23,7 @@ export class HttpServiceService {
   }
 
   loginUser(login : string, password: string){
-      return this.http.get<UserLoginQueryModel>(environment.baseUrl + "/user/login", {params: {login, password}, observe: "response"});
+      return this.http.get<UserLoginQueryModel>(environment.baseUrl + "/user/login", {params: {login, password}});
   }
 
 

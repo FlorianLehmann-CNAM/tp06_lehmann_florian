@@ -1,0 +1,92 @@
+User:
+    type: entity
+    table: user
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: Id
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: Name
+        surname:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: Surname
+        address:
+            type: string
+            nullable: true
+            length: 1024
+            options:
+                fixed: false
+            column: Address
+        postalcode:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: PostalCode
+        city:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: City
+        mobilephone:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: MobilePhone
+        mail:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: Mail
+        country:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: Country
+        gender:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: Gender
+        login:
+            type: string
+            nullable: true
+            length: 1024
+            options:
+                fixed: false
+            column: Login
+        password:
+            type: string
+            nullable: true
+            length: 9999
+            options:
+                fixed: false
+            column: Password
+    lifecycleCallbacks: {  }

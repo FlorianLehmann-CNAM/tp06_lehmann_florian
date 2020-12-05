@@ -1,7 +1,6 @@
 <?php
 
 use Slim\App;
-use App\Middleware\CorsMiddleware;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Firebase\JWT\JWT;
@@ -15,7 +14,7 @@ return function (App $app) {
     $jwt = new Tuupola\Middleware\JwtAuthentication([
         "path" => "/",
         "secret" => JWT_SECRET,
-        "ignore" => ["/user/login", "/user/register", "/products"],
+        "ignore" => ["/user/login", "/user/register"],
         "secure" => false,
         "attribute" => "decoded_token_data",
         "algorithm" => ["HS256"],
@@ -25,7 +24,6 @@ return function (App $app) {
         }
     ]);
 
-    $app->add(CorsMiddleware::class);
     $app->add($jwt);
 
     $app->get('/products', function($request, $response){
