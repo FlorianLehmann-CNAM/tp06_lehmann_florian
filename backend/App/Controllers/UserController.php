@@ -6,13 +6,15 @@ namespace App\Controllers;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use App\Models\User;
+use App\Controllers\JWTController;
+use User;
 use Firebase\JWT\JWT;
+
 
 class UserController{
    
     private $container;
-    const JWT_SECRET = "FautVraimentPasPousserLeBouchonTropLoinMaurice";
+    const JWT_SECRET = "MET-02";
 
 
     // constructor receives container instance
@@ -20,44 +22,78 @@ class UserController{
     {
         $this->container = $container;
     }
+
+    
  
     public function login(ServerRequestInterface $request, ResponseInterface $response, array $args) : ResponseInterface{
 
+        require_once __DIR__ . '/../Doctrine/bootstrap.php';
+
+
         $login = $request->getQueryParams()['login'];
         $password = $request->getQueryParams()['password'];
-        $dateTime = time();
-        $expirationTime = $dateTime + 60; // 60s of validity 
-        
-        $jwtPayload = array(
-            "userId" => 1,
-            "iat" => $dateTime,
-            "exp" => $expirationTime
-        );
-        
-        $token_jwt = JWT::encode($jwtPayload, JWT_SECRET, "HS256");
 
-        $response = $response
-            ->withHeader("Authorization", "{$token_jwt}")
-            ->withHeader("Content-Type", "application/json");
+        $userRepo = $entityManager->getRepository('User');
+        $userExist = $userRepo->findOneBy(array("login" => $login, "password" => $password));
+
+        $response = JWTController::createJwt($response);
+
+        if($userExist){
+            return $response->write(json_encode(array(
+                "success" => true,
+                "user" => [
+                    "id" => $userExist->getId(),
+                    "name" => $userExist->getName(),
+                    "surname" => $userExist->getSurname(),
+                    "mail" => $userExist->getMail()
+                ],
+            )));
+        }
+        else{
+            return $response->withStatus(404);
+        }
         
-        return $response->write(json_encode(array(
-            "success" => true,
-            "user" => [
-                "id" => 1,
-                "login" => $login,
-                "password" => $password
-            ],
-        )));
+        
     }
 
     public function register(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface{
         
-        $value = json_decode($request->getBody());
-        $user = new User(1, $value->Name, $value->Surname, $value->Address, $value->PostalCode, $value->City, $value->MobilePhone, $value->Mail, $value->Country, $value->Gender, $value->Login, $value->Password);
-        // do something with $user
+        require_once __DIR__ . '/../Doctrine/bootstrap.php';
 
+
+        $value = json_decode($request->getBody());
+        $userRepo = $entityManager->getRepository('User');
+        $userExists = $userRepo->findOneBy(array("login" => $value->Login, "name" => $value->Name));
+        
+        if(!$userExists){
+            $user = new User;
+            $user->setName($value->Name);
+            $user->setSurname($value->Surname);
+            $user->setAddress($value->Address);
+            $user->setPostalCode($value->PostalCode);
+            $user->setCity($value->City);
+            $user->setMobilePhone($value->MobilePhone);
+            $user->setMail($value->Mail);
+            $user->setCountry($value->Country);
+            $user->setGender($value->Gender);
+            $user->setLogin($value->Login);
+            $user->setPassword($value->Password);
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            return $response->write($request->getBody());
+        }
+        else{
+            return $response
+                    ->withStatus(401);
+
+        }
+
+     
+        
         //return data
-        return $response->write($user->toJson());
+
     }
 
  

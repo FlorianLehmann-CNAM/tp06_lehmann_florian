@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs/internal/Observable";
 import { Product } from "../../../models/Product";
 import { HttpServiceService } from "../../../services/http-service.service";
-import { of } from "rxjs";
+import { of, Subscription } from "rxjs";
 import { Store } from "@ngxs/store";
 import { AddProduct } from "../../../store/actions/ShoppingCart.action";
 import { Article } from "../../../models/ShoppingCart";

@@ -17,6 +17,8 @@ import { SignInUser } from 'src/app/store/actions/User.action';
 export class LoginFormComponent implements OnInit {
 
     invalidMessage: string = null;
+    loginSubscription : Subscription = null;
+
 
     passwordValidator = (control: AbstractControl) : ValidationErrors => {
         if(!control.value)
@@ -46,22 +48,21 @@ export class LoginFormComponent implements OnInit {
 
     }
 
+    ngOnDestroy(): void{
+
+    }
+
     onSubmit() : void{
         this.invalidMessage = null;
-        let subscription : Subscription = this.httpService.loginUser(this.login.value, this.password.value)
-        .subscribe((userLogin : HttpResponse<UserLoginQueryModel>) => {
-            if(userLogin.body.success){
-                let token : string = userLogin.headers.get('authorization');
-                console.log("token: ", token);
-                this.store.dispatch(new SignInUser(userLogin.body.user, token))
+        this.loginSubscription = this.httpService.loginUser(this.login.value, this.password.value)
+        .subscribe((userLogin : UserLoginQueryModel) => {
+            if(userLogin.success){
+                this.store.dispatch(new SignInUser(userLogin.user))
                 this.router.navigate(['/home']);
             }
             else
                 this.invalidMessage = "Il y a eu un problème de connexion.";
-        })
-
-        setTimeout(() => subscription.unsubscribe(), 10000);
-       
+        })       
         
     }
 
